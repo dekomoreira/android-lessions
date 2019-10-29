@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LessionViagem</string>
+    <string name="distancia">Distância</string>
+    <string name="preço">Preço</string>
+    <string name="autonomia">Autonomia</string>
+    <string name="calcular">calcular</string>
+    <string name="total_de_km">Total de KM</string>
+    <string name="km_por_litro">KM por litro</string>
+    <string name="seu_gasto_total_ser_de">Seu gasto total será de:</string>
+    <string name="pre_o_por_litro">Preço por litro</string>
+</resources>
