@@ -1,53 +1,69 @@
 package com.example.triplession
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import android.util.Log
+import androidx.core.view.isVisible
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-    override fun onClick(view: View) {
-        val id = view.id
-        if (id == R.id.buttonCalculate) {
-            handleCalculate()
-        }
-    }
 
+class MainActivity : AppCompatActivity(), numbers {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        buttonCalculate.setOnClickListener(this)
     }
 
-    private fun handleCalculate() {
-        if (isValid()) {
-            try {
+    override fun onStart() {
+        val array_of_numbers = retorna_array()
+        intent.putExtra("numbers", array_of_numbers)
+        print("Criei a variavel: ${(array_of_numbers)}")
+        super.onStart()
+        print("onStart")
+    }
 
-                val distance = editDistance.text.toString().toFloat()
-                val price = editPrice.text.toString().toFloat()
-                val autonomy = editAutonomy.text.toString().toFloat()
+    override fun onResume() {
+        super.onResume()
+        print(">>>>>>>> onResume >>>>>> aqui estou colhendo a variavel")
+        val intent = intent
+        handleArray(intent.getStringArrayExtra("numbers"))
+    }
 
-                val result = ((distance * price) / autonomy)
+    override fun onPause() {
+        super.onPause()
+        print("onPause")
+    }
 
-                textResult.setText("R$ $result")
+    override fun onStop() {
+        super.onStop()
+        print("onStop")
+    }
 
+    override fun onRestart() {
+        super.onRestart()
+        print("onRestart")
+    }
 
-            } catch (nfe: NumberFormatException) {
-                Toast.makeText(this, "Por favor, informe valores válidos!", Toast.LENGTH_LONG)
-                    .show()
-            }
+    override fun onDestroy() {
+        super.onDestroy()
+        print("onDestroy")
+    }
+
+    fun print(msg: String) {
+        Log.d("Activity State ", msg)
+    }
+
+    private fun handleArray(numbers: Array<String>) {
+        val screen_orientation = resources.configuration.orientation
+        if (screen_orientation == Configuration.ORIENTATION_PORTRAIT) {
+            textResult.setText(numbers[0])
+            textResult2.setText(numbers[1])
+            textResult3.setText(numbers[2])
+
         } else {
-            Toast.makeText(this, "Por favor, informe valores válidos!", Toast.LENGTH_LONG).show()
-
+            textResult.setText(numbers[(0..2).random()])
+            textResult2.isVisible = false
+            textResult3.isVisible = false
         }
-    }
-
-    private fun isValid(): Boolean {
-        return editDistance.text.toString() != ""
-                && editPrice.text.toString() != ""
-                && editAutonomy.text.toString() != ""
-                && editAutonomy.text.toString() != "0"
     }
 }

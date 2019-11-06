@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LessionViagem</string>
+    <string name="app_name">RodrigoExam</string>
     <string name="distancia">Distância</string>
     <string name="preço">Preço</string>
     <string name="autonomia">Autonomia</string>
